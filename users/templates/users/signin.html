@@ -1,0 +1,16 @@
+<div class="login-page">
+    <div class="form">
+      <form method="POST" action="">
+        {% csrf_token %}
+        <h3 class="login-title">Sign IN</h3>
+        <div class="input-group mb-3">
+          <input type="text" name="username" placeholder="Username..." >
+        </div>
+        <div class="input-group mb-2">
+            <input type="password" name="password" placeholder="Password..."  >
+        </div>
+        <button type="submit"> Submit </button>
+        {% comment %} <p class="message">Don't have an account? <a href="{% url 'users:register' %}">Register</a></p> {% endcomment %}
+      </form>
+    </div>
+  </div>
