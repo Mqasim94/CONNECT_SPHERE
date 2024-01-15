@@ -1,0 +1,6 @@
+{% for object in object_list  %}
+           <h2>{{object.user}}</h2>
+           <p>{{object.city }}</p>
+           <p> {{object.bio |slice:":5"}}</p>
+            {% endfor %}
+   

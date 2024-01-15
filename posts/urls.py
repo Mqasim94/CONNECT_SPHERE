@@ -10,6 +10,9 @@ urlpatterns = [
 
 #path('register/', Register, name = 'register')
 path('profile/', profile_Create.as_view(), name='profile'),
+path('List_profile/',  List_profile.as_view(), name=' List_profile'),
+path('Detail_profile/<pk>/', Detail_profile.as_view(), name='Detail_profile'),
+
 
 ]
         
