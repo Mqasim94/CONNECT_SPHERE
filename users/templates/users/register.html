@@ -1,12 +1,14 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
 </head>
 <body>
-    <form method='POST' action="{% url "register" %}">
+    <form method='POST' action="{% url "register" %}" style = "margin-top: 300px;margin-bottom: 100px; padding: 30px;">
         {% csrf_token %}
 
         {{form}}
