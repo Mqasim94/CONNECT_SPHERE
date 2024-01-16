@@ -1,6 +1,11 @@
+{% extends 'base.html' %}
 
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/register.css' %}" >
+
+{% block title %}{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/formstyling.css' %}" >
 
 <div class="login-page">
     <div class="form">
@@ -16,7 +21,9 @@
         </div>
         <br>
         <button type="submit"> Submit </button>
-        {% comment %} <p class="message">Don't have an account? <a href="{% url 'users:register' %}">Register</a></p> {% endcomment %}
+        {% comment %} Redirecting to new user form if don't have an account  {% endcomment %}
+        <p class="message">Don't have an account? <a href="{% url 'register' %}">Register</a></p>
       </form>
     </div>
   </div>
+  {% endblock %}

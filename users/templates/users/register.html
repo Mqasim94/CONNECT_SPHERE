@@ -1,11 +1,17 @@
+{% extends 'base.html' %}
+
 {% load static %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+    <title>New User Form</title>
+    <link rel="stylesheet" href="{% static 'css/formstyling.css' %}">
 </head>
 <body>
     <form method='POST' action="{% url "register" %}" style = "margin-top: 300px;margin-bottom: 100px; padding: 30px;">
@@ -16,3 +22,4 @@
     </form>
 </body>
 </html>
+{% endblock %}
