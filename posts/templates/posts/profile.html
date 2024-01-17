@@ -1,13 +1,21 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/formstyling.css' %}">
+    <title>Profile Creation Form</title>
 </head>
 <body>
     
-    <form method="POST" action = "{% url 'profile' %}">
+    <form method="POST" action = "{% url 'profile' %}" style = "margin-top: 70px; margin-bottom: 70px; padding: 15px;">
         
         {% csrf_token %}
 
@@ -17,3 +25,4 @@
 
 </body>
 </html>
+{% endblock %}

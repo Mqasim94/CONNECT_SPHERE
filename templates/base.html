@@ -1,0 +1,75 @@
+{% comment %} This is a base template of our website whcich will remains same on every page. {% endcomment %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% comment %} Footer styling {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}"> 
+    {% comment %} Nav bar styling {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <title>{% block title %}Base{% endblock %}</title>
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-bar">
+                <i class='bx bx-menu sidebarOpen' ></i>
+                <span class="logo navLogo"><a href="#">Connect Sphere</a></span>
+    
+                <div class="menu">
+                    <div class="logo-toggle">
+                        <span class="logo"><a href="#">Connect Sphere</a></span>
+                        <i class='bx bx-x siderbarClose'></i>
+                    </div>
+    
+                    <ul class="nav-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Register</a></li>
+                        <li><a href="#">Sign In</a></li>
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Log Out</a></li>
+                    </ul>
+                </div>
+    
+                <div class="darkLight-searchBox">
+                    <div class="dark-light">
+                        <i class='bx bx-moon moon'></i>
+                        <i class='bx bx-sun sun'></i>
+                    </div>
+    
+                    <div class="searchBox">
+                       <div class="searchToggle">
+                        <i class='bx bx-x cancel'></i>
+                        <i class='bx bx-search search'></i>
+                       </div>
+    
+                        <div class="search-field">
+                            <input type="text" placeholder="Search...">
+                            <i class='bx bx-search'></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+        
+        
+    
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    {% comment %} Footer of Connect Sphere  {% endcomment %}
+    <footer>
+        <p>&copy; {2024} {Connect Sphere}. All rights reserved by Qasim and Najeeb Co.
+    </footer>
+    {% comment %} linking javascript file  {% endcomment %}
+    <script src="{% static 'javascript/script.js' %}"></script>
+
+</body>
+</html>
