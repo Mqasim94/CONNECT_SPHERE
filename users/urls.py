@@ -5,8 +5,8 @@ from .views import *
 
 urlpatterns = [
 
-path('register/', register_page, name = 'register'),
-path('signin/', signin, name = 'signin'),
+path('register/', Register.as_view(), name = 'register'),
+path('signin/', Signin.as_view(), name = 'signin'),
 path('home/', home, name = 'home' )
 
 
