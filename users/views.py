@@ -40,4 +40,8 @@ def signin (request):
 
     context = {}
     return render(request, 'users/signin.html', context)
+
+def home(request):
+
+    return render(request, 'users/home.html')
     

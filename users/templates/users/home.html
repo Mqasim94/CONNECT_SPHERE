@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{% endblock %}
+{% block content %}
+<style>
+    body {
+        font-family: "Roboto", sans-serif;
+        font-size: 18px;
+        background-image: url('https://img.freepik.com/premium-photo/closeup-seascape-surface-blue-sea-water-with-small-ripple-waves_127089-25489.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+    }
+
+    .head_text {
+        color: white;
+    }
+
+    .card {
+        box-shadow: 0 16px 48px #E3E7EB;
+    }
+
+    .center-options {
+        text-align: center;
+        margin-top: 50px; /* Adjust as needed */
+    }
+
+    .center-options a {
+        display: block;
+        margin-bottom: 10px;
+        text-decoration: none;
+        color: white;
+        background-color: #007bff;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .center-options a:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="container my-4">
+    <div class="row">
+        <!-- Centered Options -->
+        <div class="col-md-8 mx-auto center-options">
+            <a href="{% url 'posts:List_Post' %}" class="btn">Show Posts</a>
+            <a href="{% url "register" %}" class="btn">Register</a>
+            <a href="{% url "signin" %}" class="btn">Sign In</a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
