@@ -1,7 +1,7 @@
 from django.shortcuts import render, render, HttpResponse
-from django.views.generic.edit import CreateView, UpdateView
-from django.views.generic import DetailView, ListView
-from .models import Profile
+from django.views.generic.edit import CreateView, UpdateView , DeleteView
+from django.views.generic import ListView, DetailView
+from .models import Profile, Post
 # from .forms import Profile_Model_Form
 
 class profile_Create(CreateView):
@@ -28,3 +28,26 @@ class Delet_profile(DetailView):
     model = Profile
     template_name = 'posts/delet_profile.html'
     success_url = '/posts/List_profile/'
+
+
+class Creat_Post(CreateView):
+    model = Post
+    template_name = 'posts/creat_post.html'
+    fields = ['title', 'content', 'created_on', 'image', 'is_private']
+    
+    success_url = '/posts/List_Post/'
+
+class Update_post(UpdateView):
+    model = Post
+    fields = ['title', 'content', 'created_on', 'image', 'is_private']
+    template_name = 'posts/update_post.html'
+
+class Delet_post(DeleteView):
+    model = Post
+    template_name = 'posts/delet_post.html'
+    success_url = '/posts/List_Post/'
+
+
+class List_Post(ListView):
+    model = Post
+    template_name = 'posts/List_post.html'
