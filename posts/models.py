@@ -53,5 +53,3 @@ class ReplyComment(models.Model):
 
    def __str__(self):
        return f'reply by {self.replier_name}on{self.reply_comment}'
-   
-
