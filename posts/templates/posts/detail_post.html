@@ -39,17 +39,17 @@
                                 </p>
                                <p> {{ comment.content  }}</p>
                              
-                                {% comment %} <a href="{% url 'posts:reply_coment' comment.id %}"> {% endcomment %}
+                                <a href="{% url 'posts:reply_coment' comment.id %}">
                                 replies
                                  </a>
                                  
                             </p
                                >
-                                {% comment %} <form method="post" action="{% url 'reply_coment' pk=comment.id %}" style="margin-top: 1.3em;" id="reply-form-{{ comment.id }}">
+                                 <form method="post" action="{% url 'posts:reply_coment' comment.id %}" style="margin-top: 1.3em;" id="reply-form-{{ comment.id }}">
                                     {% csrf_token %}
                                     <input type="text" placeholder="Write your reply here" name="reply_content">
                                     <button type="submit" class="btn btn-primary btn-sm">Reply</button>
-                                </form> {% endcomment %}
+                                </form> 
                                 
                                 
                             </div>
