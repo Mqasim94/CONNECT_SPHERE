@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
-
 {% load static %}
-
-{% block title %}{% endblock %}
-
+{% block title %}New User Form{% endblock %}
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
@@ -12,13 +9,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New User Form</title>
     <link rel="stylesheet" href="{% static 'css/formstyling.css' %}">
+    <style>
+        body {
+            font-family: "Roboto", sans-serif;
+            background-image: url('https://w0.peakpx.com/wallpaper/1013/766/HD-wallpaper-cute-girl-baby-is-wearing-white-dress-sitting-on-grass-facing-one-side-and-having-green-leaves-on-head-in-a-blur-background-cute-girl-babies.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            margin: 50;
+           
+            text-decoration: none;
+            display: flex;
+           
+            height: 100vh;
+            
+        }
+
+        form {
+            margin: 100px auto;
+            width: 300px;
+            {% comment %} padding: 20px; {% endcomment %}
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-    <form method='POST' action="{% url "register" %}" style = "margin-top: 300px;margin-bottom: 100px; padding: 30px;">
+    <form method="POST" action="{% url 'register' %}">
         {% csrf_token %}
-
-        {{form}}
-        <button type="submit" value="submit">SUBMIT</button>
+        {{ form }}
+        <button type="submit">Submit</button>
     </form>
 </body>
 </html>
