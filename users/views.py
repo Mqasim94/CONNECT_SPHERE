@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.views.generic import CreateView, View
 from .models import User
+from django.contrib.auth.views import LogoutView
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
@@ -57,6 +58,12 @@ class Signin(View):
                 return HttpResponse('logged in')
         message = 'Login failed!'
         return render(request, self.template_name, context={'form': form, 'message': message})
+    
+class LogoutView(LogoutView):
+
+    success_url= '/users/home.html'
+
+
 
 # def signin (request):
 #     if request.method == 'POST':

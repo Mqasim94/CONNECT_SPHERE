@@ -19,6 +19,7 @@ class List_profile(ListView):
     model = Profile
     feilds = '__all__'
     template_name = 'posts/List_profile.html' 
+    
 
 class Update_Profile(UpdateView):
     model = Profile
@@ -30,6 +31,9 @@ class Delet_profile(DetailView):
     model = Profile
     template_name = 'posts/delet_profile.html'
     success_url = '/posts/List_profile/'
+
+
+
 
 
 class Creat_Post(CreateView):
@@ -55,10 +59,12 @@ class Delet_post(DeleteView):
             return True
         return False
 
+def UserProfile(request):
+
+    return render(request, 'posts/userprofile.html')
 
 
-
-class List_Post(LoginRequiredMixin,ListView):
+class List_Post(ListView):
     model = Post
     template_name = 'posts/List_post.html'
 

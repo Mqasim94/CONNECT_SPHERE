@@ -1,6 +1,29 @@
-{% for object in object_list  %}
-           <h2>{{object.user}}</h2>
-           <p>{{object.city }}</p>
-           <p> {{object.bio |slice:":5"}}</p>
-            {% endfor %}
-   
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+    <!-- Add any additional head elements if needed -->
+</head>
+<body>
+
+    <div>
+        <h3>User List</h3>
+        {% for object in object_list %}
+            <div class="user-comment">
+                <h2>{{ object.user }}</h2>
+                <p>City: {{ object.city }}</p>
+                <p>Bio: {{ object.bio | slice:":5" }}</p>
+                <!-- Add any additional styling or information for each user -->
+            </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
+
+{% endblock content %}
