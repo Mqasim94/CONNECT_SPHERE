@@ -96,7 +96,16 @@ def like_post(request, pk):
     return redirect('posts:post_detail', pk=post.id)
 
 
+def reply_coment(request, pk):
+    cmnt = get_object_or_404(Comment, id=pk)
+    replies = cmnt.replies.all()
+    reply = None
+    if request.method== "POST":
+        reply_content = request.POST.get('reply_content')
+        reply_content = ReplyComment(reply_content=reply_content, replier_name=request.user, reply_comment=cmnt)
+        reply_content.save()
 
+    return render(request, 'posts/reply_coment.html',{'reply ': reply , 'replies':replies})
 
 
 
