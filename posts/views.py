@@ -47,7 +47,13 @@ class Delet_post(DeleteView):
     template_name = 'posts/delet_post.html'
     success_url = '/posts/List_Post/'
 
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
 
 class List_Post(ListView):
     model = Post
     template_name = 'posts/List_post.html'
+
