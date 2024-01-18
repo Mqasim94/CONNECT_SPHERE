@@ -2,6 +2,8 @@ from django.shortcuts import render, render, HttpResponse,  get_object_or_404, r
 from django.views.generic.edit import CreateView, UpdateView , DeleteView
 from django.views.generic import ListView, DetailView
 from .models import Profile, Post, Comment, ReplyComment
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 # from .forms import Profile_Model_Form
 
 class profile_Create(CreateView):
@@ -53,10 +55,15 @@ class Delet_post(DeleteView):
             return True
         return False
 
-class List_Post(ListView):
+
+
+
+class List_Post(LoginRequiredMixin,ListView):
     model = Post
     template_name = 'posts/List_post.html'
 
+
+     
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, id=pk)
@@ -67,24 +74,29 @@ def post_detail(request, pk):
             content = request.POST.get('content')
             post_coment = Comment(content = content , post = post , user = request.user ) 
             post_coment.save()
-            return redirect('post_detail', pk=post.id)
+            return redirect('posts:post_detail', pk=post.id)
+
+       
+    is_liked= True
+    if post.like.filter(id=request.user.id). exists(): 
+        is_liked = False
+        
     return render(request, 'posts/detail_post.html', {'post': post, 'new_comment': new_comment, 'comments': comments, "id":pk, 'total_likes': post.total_like(), 'is_liked': is_liked })
 
 
-def reply_coment(request, pk):
-    cmnt = get_object_or_404(Comment, id=pk)
-    replies = cmnt.replies.all()
-    reply = None
-    if request.method== "POST":
-        reply_content = request.POST.get('reply_content')
-        reply_content = ReplyComment(reply_content=reply_content, replier_name=request.user, reply_comment=cmnt)
-        reply_content.save()
+def like_post(request, pk):
+    post = get_object_or_404(Post, id=pk)
+    is_liked = False
+    if post.like.filter(id=request.user.id). exists():
+        post.like.remove(request.user)
+        is_liked = False
+    else:
+        post.like.add(request.user)
+        is_liked= True
+    return redirect('posts:post_detail', pk=post.id)
 
-    return render(request, 'posts/reply_coment.html',{'reply ': reply , 'reply_cmnts':replies})
 
 
-             
-    
 
 
 

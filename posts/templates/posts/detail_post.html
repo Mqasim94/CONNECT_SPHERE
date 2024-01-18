@@ -10,14 +10,14 @@
                 <p class="card-text ">{{ post.content | safe }}</p>
                 {{ total_likes }} Like{{ total_likes|pluralize }}
                 
-                {% comment %} <form action="{% url 'like_post' pk=post.id %}" method= "POST">
+                 <form action="{% url 'posts:like_post' post.id %}" method= "POST">
                     {% csrf_token %}
-                    {% if is_liked %}
-                    <button type="submit" name="post_id" value="{{ post_id }}" class="btn btn-primary">Like</button>
-                    {% else %}
-                    <button type="submit" name="post_id" value="{{ post_id }}" class="btn btn-danger">dislike</button>
-                    {% endif %}
-                </form> {% endcomment %}
+                   {% if is_liked %}
+                   <button type="submit" name="post_id" value="{{ post_id }}" class="btn btn-primary">Like</button>
+                   {% else %}
+                   <button type="submit" name="post_id" value="{{ post_id }}" class="btn btn-danger">dislike</button>
+                   {% endif %}
+               </form>   
             </div>
         </div>
         {% block sidebar %}
@@ -39,16 +39,17 @@
                                 </p>
                                <p> {{ comment.content  }}</p>
                              
-                                <a href="{% url 'reply_coment' pk=comment.id %}">
+                                {% comment %} <a href="{% url 'posts:reply_coment' comment.id %}"> {% endcomment %}
                                 replies
                                  </a>
+                                 
                             </p
                                >
-                                <form method="post" action="{% url 'reply_coment' pk=comment.id %}" style="margin-top: 1.3em;" id="reply-form-{{ comment.id }}">
+                                {% comment %} <form method="post" action="{% url 'reply_coment' pk=comment.id %}" style="margin-top: 1.3em;" id="reply-form-{{ comment.id }}">
                                     {% csrf_token %}
                                     <input type="text" placeholder="Write your reply here" name="reply_content">
                                     <button type="submit" class="btn btn-primary btn-sm">Reply</button>
-                                </form>
+                                </form> {% endcomment %}
                                 
                                 
                             </div>
