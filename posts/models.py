@@ -15,13 +15,18 @@ class Profile(models.Model):
     
 
 class Post(models.Model):
-    title = models.CharField(max_length=255)
-    content = models.TextField()
-    shared_user = models.ForeignKey(User, on_delete=models.CASCADE)
-    created_on = models.DateTimeField(default=timezone.now)
-    shared_on = models.DateTimeField(default=timezone.now)
-    image = models.ImageField(upload_to='post_pic', blank=True, null=True)
-    
+    title        = models.CharField(max_length=255)
+    content      = models.TextField()
+    like         = models.ManyToManyField(User, related_name='likes', blank= True, null= True)
+    shared_user  = models.ForeignKey(User, on_delete=models.CASCADE, null= True)
+    created_on   = models.DateTimeField(default=timezone.now)
+    shared_on    = models.DateTimeField(default=timezone.now)
+    image        = models.ImageField(upload_to='post_pic', blank=True, null=True)
+    is_private   = models.BooleanField(default= False)
+   
     
     def __str__(self):
-        return  f'{self.shared_user.username} post {self.title}'
+        return  f'{self.title}'
+    
+    def total_like(self):
+        return self.like.count()

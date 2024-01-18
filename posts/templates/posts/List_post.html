@@ -1,0 +1,49 @@
+{% extends "base.html" %} 
+{% block content %}
+<style>
+    body {
+        font-family: "Roboto", sans-serif;
+        font-size: 18px;
+        background-image: url('https://img.freepik.com/premium-photo/closeup-seascape-surface-blue-sea-water-with-small-ripple-waves_127089-25489.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+    }
+    
+    .head_text {
+        color: white;
+    }
+    
+    .card {
+        box-shadow: 0 16px 48px #E3E7EB;
+    }
+</style>
+
+
+<div class="container my-4">
+    <div class="row">
+        <!-- Blog Entries Column -->
+        <div class="col-md-8 mt-3 left">
+            {% for object in object_list  %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">{{object.title}}</h2>
+                    <p class="card-text text-muted h6">{{object.content|slice:":5" }} | {{object.created_on}} </p>
+                    <p class="card-text">{{object.content }}</p>
+                    
+
+                    <a href="" class="btn btn-primary">Read More &rarr;</a>
+                </div>
+            </div>
+            {% endfor %}
+           
+        {% comment %} {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %} {% endcomment %}
+    </div>
+</div>
+{%endblock%}
+   
+
+
+    
+    
