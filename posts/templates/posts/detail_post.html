@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 card mb-4 mt-3 left top">
+            <div class="card-body">
+                <h1>{% block title %} {{ post.title }} {% endblock title %}</h1>
+                <p class=" text-muted">{{ post.shared_user }} | {{ post.created_on }}</p>
+                <img src="{{'post.image.url'}}" alt="image">
+                <p class="card-text ">{{ post.content | safe }}</p>
+                {{ total_likes }} Like{{ total_likes|pluralize }}
+                
+                {% comment %} <form action="{% url 'like_post' pk=post.id %}" method= "POST">
+                    {% csrf_token %}
+                    {% if is_liked %}
+                    <button type="submit" name="post_id" value="{{ post_id }}" class="btn btn-primary">Like</button>
+                    {% else %}
+                    <button type="submit" name="post_id" value="{{ post_id }}" class="btn btn-danger">dislike</button>
+                    {% endif %}
+                </form> {% endcomment %}
+            </div>
+        </div>
+        {% block sidebar %}
+        {% include 'sidebar.html' %}
+        {% endblock sidebar %}
+        <div class="col-md-8 card mb-4 mt-3">
+            <div class="card-body">
+                <!-- comments -->
+                <h2>{{ comments.count }} comments</h2>
+                <div id="default-comments">
+                    {% if comments %}
+                        {% for comment in comments %}
+                            <div class="comments" style="padding: 10px;">
+                                <p class="font-weight-bold">
+                                    {{ comment.user }}
+                                    <span class="text-muted font-weight-normal">
+                                        {{ comment.created_at }}
+                                    </span>
+                                </p>
+                               <p> {{ comment.content  }}</p>
+                             
+                                <a href="{% url 'reply_coment' pk=comment.id %}">
+                                replies
+                                 </a>
+                            </p
+                               >
+                                <form method="post" action="{% url 'reply_coment' pk=comment.id %}" style="margin-top: 1.3em;" id="reply-form-{{ comment.id }}">
+                                    {% csrf_token %}
+                                    <input type="text" placeholder="Write your reply here" name="reply_content">
+                                    <button type="submit" class="btn btn-primary btn-sm">Reply</button>
+                                </form>
+                                
+                                
+                            </div>
+                            
+                        {% endfor %}
+                    {% endif %}
+
+                    {% comment %} {% for reply in reply_cmnts %}
+                                    <div class="reply" style="padding: 10px; margin-left: 20px;">
+                                        <p class="font-weight-bold">
+                                            {{ reply.replier_name }}
+                                            <span class="text-muted font-weight-normal">
+                                                {{ reply.replied_date }}
+                                            </span>
+                                        </p>
+                                        {{ reply.reply_content  }}
+                                    </div>
+                                {% endfor %} {% endcomment %}
+                </div>
+                <button id="show-all-comments" class="btn btn-primary btn-lg" onclick="toggleComments()">Show All Comments</button>
+                
+                
+                <form method="post" style="margin-top: 1.3em;" id="comment-form">
+                    {% csrf_token %}
+                    <input type="text" placeholder="Write your comment here" name="content">
+                    <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                </form>
+            </div>
+        </div>
+        <script>
+            function toggleComments() {
+                var defaultComments = document.getElementById('default-comments');
+                var allComments = document.getElementById('all-comments');
+                var showAllCommentsButton = document.getElementById('show-all-comments');
+                var commentForm = document.getElementById('comment-form');
+
+                if (defaultComments.style.display === 'none') {
+                    defaultComments.style.display = 'block';
+                    allComments.style.display = 'none';
+                    showAllCommentsButton.innerText = 'Show All Comments';
+                    commentForm.style.display = 'block';
+                } 
+                else {
+                    defaultComments.style.display = 'none';
+                    allComments.style.display = 'block';
+                    showAllCommentsButton.innerText = 'Hide Comments';
+                    commentForm.style.display = 'none';
+                }
+            }
+        </script>
+    </div>
+</div>
+{% endblock content %}

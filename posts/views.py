@@ -1,7 +1,7 @@
-from django.shortcuts import render, render, HttpResponse
+from django.shortcuts import render, render, HttpResponse,  get_object_or_404, redirect
 from django.views.generic.edit import CreateView, UpdateView , DeleteView
 from django.views.generic import ListView, DetailView
-from .models import Profile, Post
+from .models import Profile, Post, Comment
 # from .forms import Profile_Model_Form
 
 class profile_Create(CreateView):
@@ -56,4 +56,24 @@ class Delet_post(DeleteView):
 class List_Post(ListView):
     model = Post
     template_name = 'posts/List_post.html'
+
+
+def post_detail(request, pk):
+    post = get_object_or_404(Post, id=pk)
+    comments = post.comments.all()
+    new_comment = None
+
+    if request.method == 'POST':
+            content = request.POST.get('content')
+            post_coment = Comment(content = content , post = post , user = request.user ) 
+            post_coment.save()
+            return redirect('post_detail', pk=post.id)
+    return render(request, 'posts/detail_post.html', {'post': post, 'new_comment': new_comment, 'comments': comments, "id":pk, 'total_likes': post.total_like(), 'is_liked': is_liked })
+
+
+
+             
+    
+
+
 

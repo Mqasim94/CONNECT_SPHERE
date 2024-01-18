@@ -20,6 +20,8 @@ path('Creat_Post/', Creat_Post.as_view(), name= 'Creat_Post'),
 path('List_Post/', List_Post.as_view(), name= 'List_Post'),
 path('Update_post/<pk>', Update_post.as_view(), name='Update_post'),
 path('Delet_post/<pk>', Delet_post.as_view(), name='Delet_post'),
+path('post_detail/<pk>/', post_detail, name='post_detail'),
+
 
 
 
