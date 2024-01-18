@@ -30,3 +30,16 @@ class Post(models.Model):
     
     def total_like(self):
         return self.like.count()
+    
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    # parent = TreeForeignKey('self', on_delete=models.CASCADE,null=True, blank=True, related_name='children')
+    active = models.BooleanField(default=False)
+    
+
+    def __str__(self):
+        return f'Comment by {self.user.username} on {self.post.title}'

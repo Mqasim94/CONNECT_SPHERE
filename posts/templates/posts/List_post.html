@@ -4,11 +4,7 @@
     body {
         font-family: "Roboto", sans-serif;
         font-size: 18px;
-        background-image: url('https://img.freepik.com/premium-photo/closeup-seascape-surface-blue-sea-water-with-small-ripple-waves_127089-25489.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-attachment: fixed;
-        background-position: center;
+        background-color: #fdfdfd;
     }
     
     .head_text {
@@ -20,8 +16,21 @@
     }
 </style>
 
-
-<div class="container my-4">
+<header class="masthead">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class=" col-md-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h3 class=" site-heading my-4 mt-3 text-white"> Welcome  Connect Sphere </h3>
+                    <p class="text-light">We Share your vibes to others
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
     <div class="row">
         <!-- Blog Entries Column -->
         <div class="col-md-8 mt-3 left">
@@ -33,12 +42,12 @@
                     <p class="card-text">{{object.content }}</p>
                     
 
-                    <a href="" class="btn btn-primary">Read More &rarr;</a>
+                    <a href="{% url "post_detail" pk=object.id %}" class="btn btn-primary">Read More &rarr;</a>
                 </div>
             </div>
             {% endfor %}
            
-        {% comment %} {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %} {% endcomment %}
+        {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
     </div>
 </div>
 {%endblock%}
