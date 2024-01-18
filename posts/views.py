@@ -1,7 +1,7 @@
 from django.shortcuts import render, render, HttpResponse,  get_object_or_404, redirect
 from django.views.generic.edit import CreateView, UpdateView , DeleteView
 from django.views.generic import ListView, DetailView
-from .models import Profile, Post, Comment
+from .models import Profile, Post, Comment, ReplyComment
 # from .forms import Profile_Model_Form
 
 class profile_Create(CreateView):
@@ -70,6 +70,17 @@ def post_detail(request, pk):
             return redirect('post_detail', pk=post.id)
     return render(request, 'posts/detail_post.html', {'post': post, 'new_comment': new_comment, 'comments': comments, "id":pk, 'total_likes': post.total_like(), 'is_liked': is_liked })
 
+
+def reply_coment(request, pk):
+    cmnt = get_object_or_404(Comment, id=pk)
+    replies = cmnt.replies.all()
+    reply = None
+    if request.method== "POST":
+        reply_content = request.POST.get('reply_content')
+        reply_content = ReplyComment(reply_content=reply_content, replier_name=request.user, reply_comment=cmnt)
+        reply_content.save()
+
+    return render(request, 'posts/reply_coment.html',{'reply ': reply , 'reply_cmnts':replies})
 
 
              

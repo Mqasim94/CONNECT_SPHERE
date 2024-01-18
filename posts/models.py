@@ -43,3 +43,13 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'Comment by {self.user.username} on {self.post.title}'
+    
+
+class ReplyComment(models.Model):
+   reply_comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='replies')
+   replier_name = models.ForeignKey(User, on_delete=models.CASCADE)
+   reply_content = models.TextField()
+   replied_date = models.DateTimeField(default=timezone.now)
+
+   def __str__(self):
+       return f'reply by {self.replier_name}on{self.reply_comment}'
