@@ -31,13 +31,13 @@ class Register(CreateView):
     model = User
     form_class = Register_Form
     template_name = 'users/register.html'
-    success_url = '/users/signin/'
+    success_url = '/signin/'
 
 
 class Signin(View):
     template_name = 'users/signin.html'
     form_class = Signin_Form
-    # success_url = reverse_lazy('post_list')
+    success_url = '/posts/post_list/'
     
     def get(self, request):
         form = self.form_class()
@@ -54,10 +54,9 @@ class Signin(View):
             )
             if user is not None:
                 login(request, user)
-                # return redirect('posts/List_Post')
-                return HttpResponse('logged in')
+                return redirect('/posts/List_Post/')
         message = 'Login failed!'
-        return render(request, self.template_name, context={'form': form, 'message': message})
+        
     
 class LogoutView(LogoutView):
 
