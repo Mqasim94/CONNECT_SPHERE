@@ -1,8 +1,16 @@
+{% extends 'base.html' %}
 
+{% load static %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
 <body>
-    <form method="post">
+    <form method="post" style = "margin-top: 70px; margin-bottom: 70px; padding: 15px;">
         {% csrf_token %}
         <p>Are you sure you want to delete "{{ object }}"?</p>
         <input type="submit" value="Save">
     </form>
 </body>
+
+{% endblock %}
