@@ -11,7 +11,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 class profile_Create(LoginRequiredMixin, CreateView):
     model = Profile
     fields = '__all__'
-    template_name = 'posts/profile.html'  
+    template_name = 'posts/profile.html' 
+    success_url = '/posts/List_profile/' 
 
 class Detail_profile(LoginRequiredMixin, DetailView):
     model = Profile
@@ -20,7 +21,18 @@ class Detail_profile(LoginRequiredMixin, DetailView):
 class List_profile(ListView):
     model = Profile
     feilds = '__all__'
-    template_name = 'posts/List_profile.html' 
+    template_name = 'posts/List_profile.html'
+
+class UserPost(ListView):
+    model = Post
+    template_name = 'posts/Userposts.html'
+    feilds = '__all__'
+
+    def get_queryset(self):
+        return Post.objects.filter(shared_user=self.request.user)
+
+
+
     
 
 class Update_Profile(LoginRequiredMixin, UpdateView):
@@ -38,12 +50,13 @@ class Delet_profile(LoginRequiredMixin, DetailView):
 
 
 
-class Creat_Post(CreateView):
+class Creat_Post(LoginRequiredMixin, CreateView):
     model = Post
     template_name = 'posts/creat_post.html'
     fields = ['title', 'content', 'created_on', 'image', 'is_private']
-    
     success_url = '/posts/List_Post/'
+
+   
 
 class Update_post(LoginRequiredMixin, UpdateView):
     model = Post
