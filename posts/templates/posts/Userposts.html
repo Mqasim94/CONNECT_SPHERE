@@ -30,8 +30,8 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <h2 class="card-title">{{object.title}}</h2>
-                    <p class="card-text text-muted h6">{{object.shared_user }} | {{object.created_on}} </p>
-                    <p class="card-text">{{object.content |slice:":5"}}</p>
+                    <p class="card-text text-muted h6">{{object.content|slice:":5" }} | {{object.created_on}} </p>
+                    <p class="card-text">{{object.content }}</p>
                     <a href="{% url 'posts:post_detail' object.id %}" class="btn btn-primary">Read More &rarr;</a>
                 </div>
             </div>

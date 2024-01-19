@@ -16,6 +16,7 @@ path('List_profile/',  List_profile.as_view(), name=' List_profile'),
 path('Detail_profile/<pk>/', Detail_profile.as_view(), name='Detail_profile'),
 path('Delet_profile/<pk>/',  Delet_profile.as_view(), name=' Delet_profile'),
 path('Update_Profile/<pk>/', Update_Profile.as_view(), name='Update_Profile'),
+path('UserPost/<pk>/', UserPost.as_view(), name='UserPost'),
 
 
 path('Creat_Post/', Creat_Post.as_view(), name= 'Creat_Post'),
