@@ -8,7 +8,7 @@ class Profile(models.Model):
     date_of_birth = models.DateField()
     city = models.CharField(max_length=200)
     bio = models.TextField()
-    profile_pic = models.ImageField(upload_to='images/', blank=True, null=True)
+    profile_pic = models.ImageField(default='default.jpg', upload_to='images', blank=True, null=True)
 
     def __str__(self):
         return self.user.username

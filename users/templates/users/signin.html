@@ -50,7 +50,7 @@
     </style>
 </head>
 <body>
-    <form method="POST" action="{% url 'register' %}">
+    <form method="POST" action="{% url 'signin' %}">
         {% csrf_token %}
         {{ form }}
         <button type="submit">Signin</button>

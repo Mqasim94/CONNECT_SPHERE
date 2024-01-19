@@ -10,15 +10,3 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile updation form</title>
-</head>
-<body>
-    <form method="post" style = "margin-top: 70px; margin-bottom: 70px; padding: 15px;">
-        {% csrf_token %}
-         {{ form.as_p }}
-        <input type="submit" value="Save">
-    </form>
-</body>
-</html>
-
-{% endblock %}

@@ -2,16 +2,18 @@ from django.shortcuts import render, render, HttpResponse,  get_object_or_404, r
 from django.views.generic.edit import CreateView, UpdateView , DeleteView
 from django.views.generic import ListView, DetailView
 from .models import Profile, Post, Comment, ReplyComment
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # from .forms import Profile_Model_Form
 
-class profile_Create(CreateView):
+
+class profile_Create(LoginRequiredMixin, CreateView):
     model = Profile
     fields = '__all__'
     template_name = 'posts/profile.html'  
 
-class Detail_profile(DetailView):
+class Detail_profile(LoginRequiredMixin, DetailView):
     model = Profile
     template_name= 'posts/detail_profile.html'
  
@@ -19,17 +21,21 @@ class List_profile(ListView):
     model = Profile
     feilds = '__all__'
     template_name = 'posts/List_profile.html' 
+    
 
-class Update_Profile(UpdateView):
+class Update_Profile(LoginRequiredMixin, UpdateView):
     model = Profile
     fields = '__all__'
     template_name = 'posts/update_profile.html'
     success_url = '/posts/List_profile/'
 
-class Delet_profile(DetailView):
+class Delet_profile(LoginRequiredMixin, DetailView):
     model = Profile
     template_name = 'posts/delet_profile.html'
     success_url = '/posts/List_profile/'
+
+
+
 
 
 class Creat_Post(CreateView):
@@ -39,26 +45,29 @@ class Creat_Post(CreateView):
     
     success_url = '/posts/List_Post/'
 
-class Update_post(UpdateView):
+class Update_post(LoginRequiredMixin, UpdateView):
     model = Post
     fields = ['title', 'content', 'created_on', 'image', 'is_private']
     template_name = 'posts/update_post.html'
 
-class Delet_post(DeleteView):
+class Delet_post(LoginRequiredMixin, DeleteView):
     model = Post
     template_name = 'posts/delet_post.html'
     success_url = '/posts/List_Post/'
 
     def test_func(self):
         post = self.get_object()
-        if self.request.user == post.author:
+        if self.request.user == post.user:
             return True
         return False
 
+@login_required(login_url='/posts/signin/')
+def UserProfile(request):
+
+    return render(request, 'posts/userprofile.html')
 
 
-
-class List_Post(LoginRequiredMixin,ListView):
+class List_Post(ListView):
     model = Post
     template_name = 'posts/List_post.html'
 
@@ -93,7 +102,7 @@ def like_post(request, pk):
     else:
         post.like.add(request.user)
         is_liked= True
-    return redirect('posts:post_detail', pk=post.id, is_liked=is_liked)
+    return redirect('posts:post_detail', pk=post.id)
 
 
 def reply_coment(request, pk):

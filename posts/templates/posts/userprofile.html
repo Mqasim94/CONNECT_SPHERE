@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            background-image:url('https://img.freepik.com/premium-photo/closeup-seascape-surface-blue-sea-water-with-small-ripple-waves_127089-25489.jpg');
+            background-size: cover; /* Adjust as needed */
+            background-position: center; /* Adjust as needed */
+            background-repeat: no-repeat;
+            margin: 0; /* Remove default body margin */
+            padding: 0; /* Remove default body padding */
+        }
+    
+        .profile-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+    
+        .profile-header {
+            background-color: #3498db;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin-top: 80px;
+        }
+    
+        .profile-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+    
+        .profile-button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            color: #fff;
+        }
+    
+        .update-profile {
+            background-color: #2ecc71;
+        }
+    
+        .logout {
+            background-color: #e74c3c;
+        }
+    
+        .delete-profile {
+            background-color: #f39c12;
+        }
+    
+        .show-posts {
+            background-color: #3498db;
+        }
+    </style>
+    
+    <!-- Add any additional head elements if needed -->
+</head>
+<body>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <h2>User Profile</h2>
+            <!-- Add user-specific information here -->
+        </div>
+
+        <div class="profile-buttons">
+            <a href="/posts/Update_Profile/{{user.id}}" class="profile-button update-profile">Update Profile</a>
+            <a href="/users/logout/{{user.id}}" class="profile-button logout">Logout</a>
+            <a href="/posts/Delet_profile/{{user.id}}" class="profile-button delete-profile">Delete Profile</a>
+            <a href="" class="profile-button show-posts">Show All Posts</a>
+        </div>
+    </div>
+
+</body>
+</html>
+
+{% endblock content %}
