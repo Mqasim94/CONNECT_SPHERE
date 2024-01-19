@@ -71,6 +71,9 @@ class List_Post(ListView):
     model = Post
     template_name = 'posts/List_post.html'
 
+    def get_queryset(self):
+        return Post.objects.filter(is_private=False)
+
 
      
 
