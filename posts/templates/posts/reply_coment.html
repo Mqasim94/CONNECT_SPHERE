@@ -1,42 +1,68 @@
 {% extends 'base.html' %}
-{% block content %}
 
+{% block content %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    {% comment %} <title>{{ post.title }}</title> {% endcomment %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comment Replies</title>
+    <style>
+        /* Add your CSS styling here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://img.freepik.com/premium-photo/closeup-seascape-surface-blue-sea-water-with-small-ripple-waves_127089-25489.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .reply-container {
+            margin-top: 20px;
+        }
+
+        .reply {
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+        }
+
+        .reply p {
+            margin: 0;
+        }
+
+        h3 {
+            color: #333;
+        }
+    </style>
 </head>
 <body>
 
-    {% comment %} <h1>{{ post.title }}</h1>
-    <p>{{ post.content }}</p> {% endcomment %}
+    <div class="container">
+        <h3>Replies</h3>
+        {% for reply in replies %}
+            <div class="reply">
+                <p><strong>{{ reply.replier_name }}</strong></p>
+                <p>{{ reply.reply_content }}</p>
+            </div>
+        {% endfor %}
+    </div>
 
-    <h2>Comments</h2>
-    {% comment %} {% for comment in post.comments.all %}
-        <div>
-            <p>{{ comment.content }}</p>
-            <p>By: {{ comment.user.username }}</p>
-            <p>Created at: {{ comment.created_at }}</p>
-
-            {% if comment.active %}
-                <p>This comment is active</p>
-            {% else %}
-                <p>This comment is inactive</p>
-            {% endif %} {% endcomment %}
-
-            {% comment %} {% if comment.replies.all %} {% endcomment %}
-                <h3>Replies</h3>
-                {% for reply in replies %}
-                    <div>
-                        <p>By: {{ reply.replier_name }}</p>
-                        <p>{{ reply.reply_content }}</p>
-                        
-                    </div>
-                {% endfor %}
-            {% comment %} {% endif %} {% endcomment %}
-
-        </div>
-    {% comment %} {% endfor %} {% endcomment %}
-    {% endblock content %}
 </body>
 </html>
+
+{% endblock content %}

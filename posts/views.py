@@ -93,7 +93,7 @@ def like_post(request, pk):
     else:
         post.like.add(request.user)
         is_liked= True
-    return redirect('posts:post_detail', pk=post.id)
+    return redirect('posts:post_detail', pk=post.id, is_liked=is_liked)
 
 
 def reply_coment(request, pk):
