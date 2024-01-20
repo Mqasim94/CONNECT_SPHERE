@@ -53,3 +53,9 @@ class ReplyComment(models.Model):
 
    def __str__(self):
        return f'reply by {self.replier_name}on{self.reply_comment}'
+   
+
+class Share(models.Model):
+    post = models.ForeignKey(Post, on_delete= models.CASCADE , related_name= 'share')
+    sender = models.ForeignKey(User, on_delete= models.CASCADE , related_name= 'sender' )
+    reciever = models.ForeignKey(User, on_delete= models.CASCADE, related_name= 'reciever')

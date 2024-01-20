@@ -21,7 +21,6 @@
     }
 </style>
 
-
 <div class="container">
     <div class="row">
         <!-- Blog Entries Column -->
@@ -31,17 +30,18 @@
                 <div class="card-body">
                     <h2 class="card-title">{{object.title}}</h2>
                     <p class="card-text text-muted h6">{{object.shared_user }} | {{object.created_on}} </p>
-                    <p class="card-text">{{object.content |slice:":5"}}</p>
+                    <p class="card-text">{{object.content |slice:":100"}}</p>
                     <a href="{% url 'posts:post_detail' object.id %}" class="btn btn-primary">Read More &rarr;</a>
+                    <a href="/posts/sharePost/{{object.id}}" class="btn btn-secondary">Share</a>
                 </div>
             </div>
             {% endfor %}
-           
+        </div>
+        <div class="col-md-4">
+            <div class="new-post-box">
+                <a href="/posts/Creat_Post/" class="new-post-link">Create New Post</a>
+            </div>
+        </div>
     </div>
 </div>
-{%endblock%}
-   
-
-
-    
-    
+{% endblock %}

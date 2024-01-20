@@ -8,7 +8,7 @@
             <div class="card-body">
                 <h1>{% block title %} {{ post.title }} {% endblock title %}</h1>
                 <p class=" text-muted">{{ post.shared_user }} | {{ post.created_on }}</p>
-                <img src="{{'post.image.url'}}" alt="image">
+                <img src="{{'posts/post.image.url'}}" alt="image">
                 <p class="card-text ">{{ post.content | safe }}</p>
                 {{ total_likes }} Like{{ total_likes|pluralize }}
                 

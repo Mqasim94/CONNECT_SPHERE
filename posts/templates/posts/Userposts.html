@@ -19,29 +19,93 @@
     .card {
         box-shadow: 0 16px 48px #E3E7EB;
     }
+    
+    .new-post-box {
+        position: fixed;
+        top: 50%;
+        right: 25px;
+        transform: translate(0, -50%);
+        background-color: #0a4991;
+        border: 1px solid #e3e7eb;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+    .show-all-posts-box {
+        position: fixed;
+        top: 60%;
+        right: 25px;
+        transform: translate(0, -50%);
+        background-color: #0a4991;
+        border: 1px solid #e3e7eb;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .new-post-link, .show-all-posts-link {
+        display: block;
+        text-align: center;
+        font-size: 20px;
+        color: #e3e7eb;
+        text-decoration: none;
+        font-weight: bold;
+    }
 </style>
-
 
 <div class="container">
     <div class="row">
-        <!-- Blog Entries Column -->
+        <!-- Create New Post Box -->
         <div class="col-md-8 mt-3 left">
-            {% for object in object_list  %}
+            <!-- Your blog entries content here -->
+            {% for object in object_list %}
             <div class="card mb-4">
                 <div class="card-body">
                     <h2 class="card-title">{{object.title}}</h2>
-                    <p class="card-text text-muted h6">{{object.content|slice:":5" }} | {{object.created_on}} </p>
-                    <p class="card-text">{{object.content }}</p>
-                    <a href="{% url 'posts:post_detail' object.id %}" class="btn btn-primary">Read More &rarr;</a>
+                    <p class="card-text text-muted h6"> <strong>{{object.shared_user}}</strong> | {{object.created_on}} </p>
+                    <p class="card-text">{{object.content|slice:":20" }}</p>
+                    <p>
+                        <a href="{% url 'posts:post_detail' object.id %}" class="btn btn-primary">Read More</a>
+                        <a href="/posts/Delet_post/{{object.id}}" class="btn btn-primary">Delete Post</a>
+                        <a href="/posts/Update_post/{{object.id}}" class="btn btn-primary">Update Post</a>
+                    </p>
                 </div>
             </div>
             {% endfor %}
-           
+        </div>
+
+        <div class="col-md-8 mt-3 left">
+            <!-- Your blog entries content here -->
+            {% for i in shared_posts %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">{{i.post}}</h2>
+                    <p class="card-text text-muted h6"> <strong>{{i.sender}}</strong> share to {{i.reciever}} </p>
+                    <p>{{ i.post.content }}</p>
+                    {% comment %} <p class="card-text">{{posts.content|slice:":20" }}</p> {% endcomment %}
+                    <p>
+                        {% comment %} <a href="/posts/post_detail/{{object.id}}" class="btn btn-primary">Read More</a>
+                        <a href="/posts/Delet_post/{{object.id}}" class="btn btn-primary">Delete Post</a>
+                        <a href="/posts/Update_post/{{object.id}}" class="btn btn-primary">Update Post</a> {% endcomment %}
+                    </p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Fixed position Create New Post Box -->
+        <div class="col-md-4">
+            <div class="new-post-box">
+                <a href="/posts/Creat_Post/" class="new-post-link">Create New Post</a>
+            </div>
+            
+            
+        </div>
+        <div>
+            <!-- Fixed position Show All Posts Box -->
+            <div class="show-all-posts-box">
+                <a href="http://127.0.0.1:8000/posts/List_Post/" class="show-all-posts-link">Show All Posts</a>
+            </div>
+        </div>
+        
     </div>
 </div>
-{%endblock%}
-   
-
-
-    
-    
+{% endblock %}

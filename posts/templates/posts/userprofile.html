@@ -60,6 +60,10 @@
         .show-posts {
             background-color: #3498db;
         }
+
+        .show-shared-posts {
+            background-color: #9b59b6; /* Choose a color for the new button */
+        }
     </style>
     
     <!-- Add any additional head elements if needed -->
@@ -68,15 +72,24 @@
 
     <div class="profile-container">
         <div class="profile-header">
-            <h2>User Profile</h2>
+            <h2>{{ user }}</h2> 
             <!-- Add user-specific information here -->
         </div>
 
         <div class="profile-buttons">
-            <a href="/posts/Update_Profile/{{user.id}}" class="profile-button update-profile">Update Profile</a>
+            
+                {% if user_profile %}
+                <a href="/posts/Update_Profile/{{user.id}}" class="profile-button update-profile">
+                    Update Profile</a>
+                {% else %}
+                <a href="/posts/profile/" class="profile-button update-profile">
+                    Create Profile</a>
+                {% endif %}
+               
             <a href="/users/logout/{{user.id}}" class="profile-button logout">Logout</a>
             <a href="/posts/Delet_profile/{{user.id}}" class="profile-button delete-profile">Delete Profile</a>
             <a href="/posts/UserPost/{{user.id}}" class="profile-button show-posts">Show All Posts</a>
+            <a href="{% url 'posts:userSharePost' %}" class="profile-button show-shared-posts">Show Shared Posts</a>
         </div>
     </div>
 
