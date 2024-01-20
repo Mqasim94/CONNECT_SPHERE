@@ -49,6 +49,8 @@
         {% for object in object_list %}
             <div class="user-comment">
                 <div class="user-name">{{ object.user }}</div>
+                {% comment %} <a href="/posts/UserProfile/{{user.id}}">View Profile</a> {% endcomment %}
+
                 <p>City: {{ object.city }}</p>
                 <p>Bio: {{ object.bio | slice:":5" }}</p>
                 <!-- Add any additional styling or information for each user -->

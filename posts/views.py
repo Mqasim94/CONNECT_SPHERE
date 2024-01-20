@@ -1,10 +1,10 @@
 from django.shortcuts import render, render, HttpResponse,  get_object_or_404, redirect
 from django.views.generic.edit import CreateView, UpdateView , DeleteView
 from django.views.generic import ListView, DetailView, View
-from .models import Profile, Post, Comment, ReplyComment, User
+from .models import Profile, Post, Comment, ReplyComment, User, Share
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import SharePostForm
+from posts.forms import SharePostForm
 
 
 # from .forms import Profile_Model_Form
@@ -12,9 +12,13 @@ from .forms import SharePostForm
 
 class profile_Create(LoginRequiredMixin, CreateView):
     model = Profile
-    fields = '__all__'
+    fields = ['date_of_birth','city','bio','profile_pic']
     template_name = 'posts/profile.html' 
     success_url = '/posts/List_profile/' 
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 class Detail_profile(LoginRequiredMixin, DetailView):
     model = Profile
@@ -32,16 +36,26 @@ class UserPost(ListView):
 
     def get_queryset(self):
         return Post.objects.filter(shared_user=self.request.user)
-
+    
 
 
     
+    
+    
+
+
 
 class Update_Profile(LoginRequiredMixin, UpdateView):
     model = Profile
-    fields = '__all__'
+    fields = ['date_of_birth','city','bio','profile_pic']
     template_name = 'posts/update_profile.html'
     success_url = '/posts/List_profile/'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+   
 
 class Delet_profile(LoginRequiredMixin, DetailView):
     model = Profile
@@ -68,6 +82,7 @@ class Update_post(LoginRequiredMixin, UpdateView):
     model = Post
     fields = ['title', 'content', 'created_on', 'image', 'is_private']
     template_name = 'posts/update_post.html'
+    success_url = '/posts/List_Post/'
 
 class Delet_post(LoginRequiredMixin, DeleteView):
     model = Post
@@ -82,8 +97,10 @@ class Delet_post(LoginRequiredMixin, DeleteView):
 
 @login_required(login_url='/posts/signin/')
 def UserProfile(request):
-
-    return render(request, 'posts/userprofile.html')
+    
+    user_profile = Profile.objects.filter(user = request.user)
+         
+    return render(request, 'posts/userprofile.html', {"user_profile":user_profile})
 
 
 class List_Post(ListView):
@@ -92,6 +109,8 @@ class List_Post(ListView):
 
     def get_queryset(self):
         return Post.objects.filter(is_private=False)
+    
+    
 
 
      
@@ -139,22 +158,27 @@ def reply_coment(request, pk):
     return render(request, 'posts/reply_coment.html',{'reply ': reply , 'replies':replies})
 
 
-def sharePost(request, post_id):
-    post = Post.objects.get(pk=post_id)
-
+def sharePost(request, pk):
+        
+    post = Post.objects.get(pk=pk, is_private=False)
+    
     if request.method == 'POST':
         form = SharePostForm(request.POST)
         if form.is_valid():
             share = form.save(commit=False)
             share.sender = request.user
+            share.post=post
             share.save()
-            post.save()
-            return redirect('/posts/List_Post/')
+            return HttpResponse('post shared')
         else:
-            return HttpResponse(form.errors)
+            return HttpResponse('post not share')
     else:
         form = SharePostForm()
 
     return render(request, 'posts/share.html', {'form': form, 'post': post})   
 
+def userSharePost(request):
+    shared_posts = Share.objects.filter(sender=request.user)
+    print(shared_posts)
+    return render(request, 'posts/Userposts.html', {'shared_posts': shared_posts})
 

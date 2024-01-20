@@ -56,6 +56,6 @@ class ReplyComment(models.Model):
    
 
 class Share(models.Model):
-    # post = models.ManyToManyField(Post,  related_name= 'share')
+    post = models.ForeignKey(Post, on_delete= models.CASCADE , related_name= 'share')
     sender = models.ForeignKey(User, on_delete= models.CASCADE , related_name= 'sender' )
     reciever = models.ForeignKey(User, on_delete= models.CASCADE, related_name= 'reciever')

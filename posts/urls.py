@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import *
+from posts.views import *
 
 app_name = 'posts'
 
@@ -26,7 +26,8 @@ path('Delet_post/<pk>', Delet_post.as_view(), name='Delet_post'),
 path('post_detail/<pk>/', post_detail, name='post_detail'),
 path('reply_coment/<pk>/', reply_coment, name='reply_coment'),
 path('like/<pk>', like_post, name = 'like_post'),
-path('sharePost/<int:post_id>/', sharePost, name='sharePost'),
+path('sharePost/<pk>/', sharePost, name='sharePost'),
+path('userSharePost/', userSharePost, name='userSharePost'),
 
 
 

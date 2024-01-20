@@ -4,4 +4,4 @@ from .models import Share
 class SharePostForm(forms.ModelForm):
     class Meta:
         model = Share
-        fields = ['post', 'receiver']
+        fields = ['reciever']
