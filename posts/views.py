@@ -1,9 +1,11 @@
 from django.shortcuts import render, render, HttpResponse,  get_object_or_404, redirect
 from django.views.generic.edit import CreateView, UpdateView , DeleteView
-from django.views.generic import ListView, DetailView
-from .models import Profile, Post, Comment, ReplyComment
+from django.views.generic import ListView, DetailView, View
+from .models import Profile, Post, Comment, ReplyComment, User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import SharePostForm
+
 
 # from .forms import Profile_Model_Form
 
@@ -55,6 +57,10 @@ class Creat_Post(LoginRequiredMixin, CreateView):
     template_name = 'posts/creat_post.html'
     fields = ['title', 'content', 'created_on', 'image', 'is_private']
     success_url = '/posts/List_Post/'
+
+    def form_valid(self, form):
+        form.instance.shared_user = self.request.user
+        return super().form_valid(form)
 
    
 
@@ -132,5 +138,23 @@ def reply_coment(request, pk):
 
     return render(request, 'posts/reply_coment.html',{'reply ': reply , 'replies':replies})
 
+
+def sharePost(request, post_id):
+    post = Post.objects.get(pk=post_id)
+
+    if request.method == 'POST':
+        form = SharePostForm(request.POST)
+        if form.is_valid():
+            share = form.save(commit=False)
+            share.sender = request.user
+            share.save()
+            post.save()
+            return redirect('/posts/List_Post/')
+        else:
+            return HttpResponse(form.errors)
+    else:
+        form = SharePostForm()
+
+    return render(request, 'posts/share.html', {'form': form, 'post': post})   
 
 

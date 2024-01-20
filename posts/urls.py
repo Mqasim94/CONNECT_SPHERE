@@ -26,6 +26,8 @@ path('Delet_post/<pk>', Delet_post.as_view(), name='Delet_post'),
 path('post_detail/<pk>/', post_detail, name='post_detail'),
 path('reply_coment/<pk>/', reply_coment, name='reply_coment'),
 path('like/<pk>', like_post, name = 'like_post'),
+path('sharePost/<int:post_id>/', sharePost, name='sharePost'),
+
 
 
 ]
