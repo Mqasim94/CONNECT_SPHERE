@@ -8,8 +8,8 @@ body {
 }
 
 header {
-    background-color: rgb(152, 185, 21);
-    color: rgb(255, 255, 255);
+    background-color: rgb(33 22 22);
+    color: rgb(249, 3, 3);
     padding: 5px;
     text-align: center;
     width: 100%;
@@ -21,8 +21,8 @@ main {
 }
 
 footer {
-    background-color: rgb(153, 153, 0);
-    color: rgb(255, 255, 255);
+    background-color: rgb(33 22 22);
+    color: rgb(255, 0, 0);
     padding: 2px;
     text-align: center;
     position: fixed;

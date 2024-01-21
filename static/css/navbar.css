@@ -13,7 +13,7 @@
 /* ===== Colours ===== */
 :root{
     --body-color: #E4E9F7;
-    --nav-color: rgb(171, 189, 13);
+    --nav-color: rgb(33 22 22);
     --side-nav: #010718;
     --text-color: #FFF;
     --search-bar: #F2F2F2;
@@ -22,7 +22,7 @@
 
 body{
     height: 100vh;
-    background-color: var(--body-color);
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 body.dark{
@@ -39,7 +39,7 @@ nav{
     left: 0;
     height: 70px;
     width: 100%;
-    background-color: var(--nav-color);
+    background-color: rgba(0, 0, 0, 0.1);
     z-index: 100;
 }
 
@@ -48,18 +48,32 @@ body.dark nav{
 
 }
 
-nav .nav-bar{
+/* nav .nav-bar{
     position: relative;
     height: 100%;
     max-width: 1000px;
     width: 100%;
-    background-color: var(--nav-color);
+    background-color: rgb(57 59 47);
+    margin: 0 auto;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+} */
+
+nav .nav-bar {
+    position: relative;
+    height: 100%;
+    max-width: 1000px;
+    width: 100%;
+    background-color: rgb(57, 59, 47); /* Change this line */
     margin: 0 auto;
     padding: 0 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
+
 
 nav .nav-bar .sidebarOpen{
     color: var(--text-color);
@@ -183,7 +197,7 @@ nav .nav-bar .logo a{
     width: 300px;
     display: flex;
     align-items: center;
-    background-color: var(--nav-color);
+    background-color:rgba(0, 0, 0, 0.1);
     padding: 3px;
     border-radius: 6px;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);

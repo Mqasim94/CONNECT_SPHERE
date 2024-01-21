@@ -73,25 +73,20 @@
         </div>
 
         <div class="col-md-8 mt-3 left">
-            <!-- Your blog entries content here -->
+            
             {% for i in shared_posts %}
             <div class="card mb-4">
                 <div class="card-body">
                     <h2 class="card-title">{{i.post}}</h2>
                     <p class="card-text text-muted h6"> <strong>{{i.sender}}</strong> share to {{i.reciever}} </p>
                     <p>{{ i.post.content }}</p>
-                    {% comment %} <p class="card-text">{{posts.content|slice:":20" }}</p> {% endcomment %}
-                    <p>
-                        {% comment %} <a href="/posts/post_detail/{{object.id}}" class="btn btn-primary">Read More</a>
-                        <a href="/posts/Delet_post/{{object.id}}" class="btn btn-primary">Delete Post</a>
-                        <a href="/posts/Update_post/{{object.id}}" class="btn btn-primary">Update Post</a> {% endcomment %}
-                    </p>
+                   
                 </div>
             </div>
             {% endfor %}
         </div>
         
-        <!-- Fixed position Create New Post Box -->
+        
         <div class="col-md-4">
             <div class="new-post-box">
                 <a href="/posts/Creat_Post/" class="new-post-link">Create New Post</a>

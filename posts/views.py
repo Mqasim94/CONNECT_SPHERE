@@ -111,8 +111,6 @@ class List_Post(ListView):
         return Post.objects.filter(is_private=False)
     
     
-
-
      
 
 def post_detail(request, pk):

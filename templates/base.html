@@ -17,15 +17,16 @@
     <link rel="stylesheet" href="{% static 'css/footer.css' %}"> 
     
     <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    
     <title>{% block title %}Base{% endblock %}</title>
-    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    {% comment %} <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'> {% endcomment %}
 </head>
 <body>
     <header>
         <nav>
             <div class="nav-bar">
                 <i class='bx bx-menu sidebarOpen' ></i>
-                <span class="logo navLogo"><a href="#">Connect Sphere</a></span>
+                <span class="logo navLogo"><a href="/posts/List_Post/">Connect Sphere</a></span>
     
                 <div class="menu">
                     <div class="logo-toggle">

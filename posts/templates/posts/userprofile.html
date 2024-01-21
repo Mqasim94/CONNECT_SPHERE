@@ -9,7 +9,7 @@
     <title>User Profile</title>
     <style>
         body {
-            background-image:url('https://img.freepik.com/premium-photo/closeup-seascape-surface-blue-sea-water-with-small-ripple-waves_127089-25489.jpg');
+            background-image:url('https://static.vecteezy.com/system/resources/previews/014/302/734/non_2x/luxury-abstract-banner-template-with-gold-blended-waves-on-black-background-with-copy-space-for-text-shiny-dynamic-light-stripes-futuristic-twisted-lines-design-in-dark-background-wallpaper-website-vector.jpg');
             background-size: cover; /* Adjust as needed */
             background-position: center; /* Adjust as needed */
             background-repeat: no-repeat;
@@ -23,7 +23,7 @@
         }
     
         .profile-header {
-            background-color: #3498db;
+            background-color: #8aa610;
             color: #fff;
             padding: 20px;
             text-align: center;
@@ -66,14 +66,25 @@
         }
     </style>
     
-    <!-- Add any additional head elements if needed -->
+    
 </head>
 <body>
 
     <div class="profile-container">
         <div class="profile-header">
             <h2>{{ user }}</h2> 
-            <!-- Add user-specific information here -->
+            <h3>{{user.email}}</h3>
+            {% for user_profile in user_profile  %}
+              
+            
+            {% if user_profile %}
+              <h4>{{user_profile.date_of_birth}}</h4>
+              <h4>{{user_profile.city}}</h4>
+              <h4>{{user_profile.bio |slice:":20"}}</h4>
+              <!-- <h4>{{user_profile.profile_pic }}</h4> -->
+            {% endif %}
+            {% endfor %}
+            
         </div>
 
         <div class="profile-buttons">
