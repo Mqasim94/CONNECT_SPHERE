@@ -27,7 +27,7 @@
         }
 
         form {
-            margin: 100px auto;
+            margin: 200px auto;
             width: 300px;
             {% comment %} padding: 20px; {% endcomment %}
             background-color: #fff;
@@ -47,13 +47,27 @@
         button:hover {
             background-color: #45a049;
         }
+
+        
+
+        .error {
+            color: red;
+            margin-top: 5px; /* Added margin-top for spacing between errors */
+        }
     </style>
 </head>
 <body>
     <form method="POST" action="{% url 'register' %}">
         {% csrf_token %}
-        {{ form }}
-        <button type="submit">Submit</button>
+        
+        {% for field in form %}
+        {{ field.label_tag }} {{ field }}
+        {% for error in field.errors %}
+            <span class="error">{{ error }}</span>
+        {% endfor %}
+        <br>
+    {% endfor %}
+    <button type="submit">Submit</button>
     </form>
 </body>
 </html>
