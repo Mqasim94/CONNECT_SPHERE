@@ -1,13 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
 
-   
-<div class="container">
+<style>
+    body {
+        font-family: "Roboto", sans-serif;
+        font-size: 18px;
+        background-image: url('https://static.vecteezy.com/system/resources/previews/014/302/734/non_2x/luxury-abstract-banner-template-with-gold-blended-waves-on-black-background-with-copy-space-for-text-shiny-dynamic-light-stripes-futuristic-twisted-lines-design-in-dark-background-wallpaper-website-vector.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+    }
+</style>   
+<div class="container" style="margin-top: 50px" >
     <div class="row">
-        <div class="col-md-8 card mb-4 mt-3 left top">
-            <div class="card-body">
+        <div class="col-md-8 card mb-4 mt-3 left top bg-dark text-light">
+            <div class="card-body ">
                 <h1>{% block title %} {{ post.title }} {% endblock title %}</h1>
-                <p class=" text-muted">{{ post.shared_user }} | {{ post.created_on }}</p>
+                <p class=" text-light" >{{ post.shared_user }} | {{ post.created_on }}</p>
                 <img src="{{'posts/post.image.url'}}" alt="image">
                 <p class="card-text ">{{ post.content | safe }}</p>
                 {{ total_likes }} Like{{ total_likes|pluralize }}
@@ -15,7 +25,7 @@
                  <form action="{% url 'posts:like_post' post.id %}" method= "POST">
                     {% csrf_token %}
                    {% if is_liked %}
-                   <button type="submit" name="post_id" value="{{ post_id }}" class="btn btn-primary">Like</button>
+                   <button type="submit" name="post_id" value="{{ post_id }}" class="btn btn-dark">Like</button>
                    {% else %}
                    <button type="submit" name="post_id" value="{{ post_id }}" class="btn btn-danger">dislike</button>
                    {% endif %}
@@ -25,7 +35,7 @@
         {% block sidebar %}
         {% include 'sidebar.html' %}
         {% endblock sidebar %}
-        <div class="col-md-8 card mb-4 mt-3">
+        <div class="col-md-8 card mb-4 mt-3 bg-dark text-light">
             <div class="card-body">
                 <!-- comments -->
                 <h2>{{ comments.count }} comments</h2>
@@ -35,7 +45,7 @@
                             <div class="comments" style="padding: 10px;">
                                 <p class="font-weight-bold">
                                     {{ comment.user }}
-                                    <span class="text-muted font-weight-normal">
+                                    <span class="text-light font-weight-normal">
                                         {{ comment.created_at }}
                                     </span>
                                 </p>
@@ -50,7 +60,7 @@
                                  <form method="post" action="{% url 'posts:reply_coment' comment.id %}" style="margin-top: 1.3em;" id="reply-form-{{ comment.id }}">
                                     {% csrf_token %}
                                     <input type="text" placeholder="Write your reply here" name="reply_content">
-                                    <button type="submit" class="btn btn-primary btn-sm">Reply</button>
+                                    <button type="submit" class="btn btn-dark btn-sm">Reply</button>
                                 </form> 
                                 
                                 
@@ -71,13 +81,13 @@
                                     </div>
                                 {% endfor %} {% endcomment %}
                 </div>
-                <button id="show-all-comments" class="btn btn-primary btn-lg" onclick="toggleComments()">Show All Comments</button>
+                <button id="show-all-comments" class="btn btn-dark btn-lg" onclick="toggleComments()">Show All Comments</button>
                 
                 
                 <form method="post" style="margin-top: 1.3em;" id="comment-form">
                     {% csrf_token %}
                     <input type="text" placeholder="Write your comment here" name="content">
-                    <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                    <button type="submit" class="btn btn-dark btn-lg">Submit</button>
                 </form>
             </div>
         </div>

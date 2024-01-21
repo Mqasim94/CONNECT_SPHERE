@@ -48,31 +48,31 @@ body.dark nav{
 
 }
 
-/* nav .nav-bar{
+nav .nav-bar{
+    position: relative;
+    height: 100%;
+    max-width: 100%;
+    width: 100%;
+    background-color: #27221e;
+    margin: 0 auto;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+} 
+
+/* nav .nav-bar {
     position: relative;
     height: 100%;
     max-width: 1000px;
     width: 100%;
-    background-color: rgb(57 59 47);
+    background-color: rgb(57, 59, 47); 
     margin: 0 auto;
     padding: 0 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 } */
-
-nav .nav-bar {
-    position: relative;
-    height: 100%;
-    max-width: 1000px;
-    width: 100%;
-    background-color: rgb(57, 59, 47); /* Change this line */
-    margin: 0 auto;
-    padding: 0 30px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
 
 
 nav .nav-bar .sidebarOpen{

@@ -7,13 +7,13 @@ body {
     flex-direction: column;
 }
 
-header {
-    background-color: rgb(33 22 22);
-    color: rgb(249, 3, 3);
+/* header {
+    background-color: #27221e;
+    color: rgb(251, 250, 250);
     padding: 5px;
     text-align: center;
     width: 100%;
-}
+} */
 
 main {
     flex: 1;
@@ -21,8 +21,8 @@ main {
 }
 
 footer {
-    background-color: rgb(33 22 22);
-    color: rgb(255, 0, 0);
+    background-color: #27221e;
+    color: rgb(240, 239, 239);
     padding: 2px;
     text-align: center;
     position: fixed;
