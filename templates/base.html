@@ -75,6 +75,19 @@
         <p>&copy; {2024} {Connect Sphere}. All rights reserved by Qasim and Najeeb Co.
     </footer>
     {% comment %} linking javascript file  {% endcomment %}
+
+    {% if user.is_authenticated %}
+    <form action="{% url "logout" %}">
+        {% csrf_token %}
+        <a href="{% url "logout" %}" class="btn btn-info btn-sm">
+            <span class="glyphicon glyphicon-log-out"></span> Log out
+        </a>
+        
+        
+    </form>
+
+    {% endif %}
+
     <script src="{% static 'javascript/script.js' %}"></script>
 
 </body>

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.views.generic import CreateView, View
 from .models import User
 from django.contrib.auth.views import LogoutView
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 from .forms import Register_Form, Signin_Form
@@ -94,9 +94,9 @@ class Signin(View):
 
 
 
-class LogoutView(LogoutView):
+# class LogoutView(LogoutView):
 
-    success_url= '/users/home.html'
+#     success_url= '/users/home.html'
 
 
 
@@ -118,4 +118,7 @@ class LogoutView(LogoutView):
 def home(request):
 
     return render(request, 'users/home.html')
-    
+
+def profile_logout(request):
+    logout (request)
+    return redirect('home')

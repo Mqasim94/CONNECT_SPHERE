@@ -86,7 +86,7 @@
                     Create Profile</a>
                 {% endif %}
                
-            <a href="/users/logout/{{user.id}}" class="profile-button logout">Logout</a>
+            <a href="/logout/" class="profile-button logout">Logout</a>
             <a href="/posts/Delet_profile/{{user.id}}" class="profile-button delete-profile">Delete Profile</a>
             <a href="/posts/UserPost/{{user.id}}" class="profile-button show-posts">Show All Posts</a>
             <a href="{% url 'posts:userSharePost' %}" class="profile-button show-shared-posts">Show Shared Posts</a>
