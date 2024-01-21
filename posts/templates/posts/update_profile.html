@@ -17,8 +17,8 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
-            background-image: url('https://img.freepik.com/premium-photo/closeup-seascape-surface-blue-sea-water-with-small-ripple-waves_127089-25489.jpg');
+            margin: 0; /* Reset margin to remove default spacing */
+            background-image: url('https://static.vecteezy.com/system/resources/previews/014/302/734/non_2x/luxury-abstract-banner-template-with-gold-blended-waves-on-black-background-with-copy-space-for-text-shiny-dynamic-light-stripes-futuristic-twisted-lines-design-in-dark-background-wallpaper-website-vector.jpg');
             background-repeat: no-repeat;
             background-size: cover;
             background-attachment: fixed;
@@ -31,6 +31,9 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff; /* Set a background color for better visibility */
+            margin-top: 70px;
+            margin-bottom: 70px;
         }
 
         form {
@@ -60,17 +63,15 @@
             cursor: pointer;
         }
     </style>
-
-
-
-    <title>Profile updation form</title>
 </head>
 <body>
-    <form method="post" style = "margin-top: 70px; margin-bottom: 70px; padding: 15px;">
-        {% csrf_token %}
-         {{ form.as_p }}
-        <input type="submit" value="Save">
-    </form>
+    <div class="container">
+        <form method="post" style="padding: 15px;">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Save">
+        </form>
+    </div>
 </body>
 </html>
 

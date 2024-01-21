@@ -5,7 +5,7 @@
         font-family: "Roboto", sans-serif;
         font-size: 18px;
         background-color: #fdfdfd;
-        background-image: url('https://img.freepik.com/premium-photo/closeup-seascape-surface-blue-sea-water-with-small-ripple-waves_127089-25489.jpg');
+        background-image: url('https://static.vecteezy.com/system/resources/previews/014/302/734/non_2x/luxury-abstract-banner-template-with-gold-blended-waves-on-black-background-with-copy-space-for-text-shiny-dynamic-light-stripes-futuristic-twisted-lines-design-in-dark-background-wallpaper-website-vector.jpg');
         background-repeat: no-repeat;
         background-size: cover;
         background-attachment: fixed;
@@ -27,11 +27,11 @@
         <div class="col-md-8 mt-3 left">
             {% for object in object_list  %}
             <div class="card mb-4">
-                <div class="card-body">
-                    <h2 class="card-title">{{object.title}}</h2>
-                    <p class="card-text text-muted h6">{{object.shared_user }} | {{object.created_on}} </p>
-                    <p class="card-text">{{object.content |slice:":100"}}</p>
-                    <a href="{% url 'posts:post_detail' object.id %}" class="btn btn-primary">Read More &rarr;</a>
+                <div class="card-body bg-dark">
+                    <h2 class="card-title text-light">{{object.title}}</h2>
+                    <p class="card-text text-light h6">{{object.shared_user }} | {{object.created_on}} </p>
+                    <p class="card-text text-light">{{object.content |slice:":100"}}</p>
+                    <a href="{% url 'posts:post_detail' object.id %}" class="btn btn-dark">Read More &rarr;</a>
                     <a href="/posts/sharePost/{{object.id}}" class="btn btn-secondary">Share</a>
                 </div>
             </div>

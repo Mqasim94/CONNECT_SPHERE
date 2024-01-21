@@ -9,11 +9,14 @@
     <title>User List</title>
     <style>
         body {
+            background-image: url('https://static.vecteezy.com/system/resources/previews/014/302/734/non_2x/luxury-abstract-banner-template-with-gold-blended-waves-on-black-background-with-copy-space-for-text-shiny-dynamic-light-stripes-futuristic-twisted-lines-design-in-dark-background-wallpaper-website-vector.jpg');
+
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+           
         }
 
         .user-list-container {
@@ -44,15 +47,15 @@
 </head>
 <body>
 
-    <div class="user-list-container">
+    <div class="user-list-container bg-dark">
         <h3>User List</h3>
         {% for object in object_list %}
             <div class="user-comment">
-                <div class="user-name">{{ object.user }}</div>
+                <div class="user-name text-light">{{ object.user }}</div>
                 {% comment %} <a href="/posts/UserProfile/{{user.id}}">View Profile</a> {% endcomment %}
 
-                <p>City: {{ object.city }}</p>
-                <p>Bio: {{ object.bio | slice:":5" }}</p>
+                <p class='text-light'>City: {{ object.city }}</p>
+                <p class='text-light'>Bio: {{ object.bio | slice:":5" }}</p>
                 <!-- Add any additional styling or information for each user -->
             </div>
         {% endfor %}

@@ -19,13 +19,13 @@
     <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
     
     <title>{% block title %}Base{% endblock %}</title>
-    {% comment %} <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'> {% endcomment %}
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
     <header>
         <nav>
             <div class="nav-bar">
-                <i class='bx bx-menu sidebarOpen' ></i>
+                <i class='bx bx-menu sidebarOpen'></i>
                 <span class="logo navLogo"><a href="/posts/List_Post/">Connect Sphere</a></span>
     
                 <div class="menu">
@@ -37,7 +37,7 @@
                     <ul class="nav-links">
                         <li><a href="/posts/List_profile/">Users</a></li>
                         <li><a href="/posts/UserProfile/">Profile</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="/logout/">Logout</a></li>
                         <li><a href="#"></a></li>
                         <li><a href="#"></a></li>
                     </ul>
@@ -72,7 +72,7 @@
         {% block content %}{% endblock %}
     </main>
     {% comment %} Footer of Connect Sphere  {% endcomment %}
-    <footer>
+    <footer style="background-color: #27221e; color: white;">
         <p>&copy; {2024} {Connect Sphere}. All rights reserved by Qasim and Najeeb Co.
     </footer>
     {% comment %} linking javascript file  {% endcomment %}

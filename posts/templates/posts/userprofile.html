@@ -23,7 +23,7 @@
         }
     
         .profile-header {
-            background-color: #8aa610;
+            background-color: #01060c;
             color: #fff;
             padding: 20px;
             text-align: center;
@@ -39,30 +39,30 @@
         .profile-button {
             padding: 10px;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
             text-decoration: none;
             color: #fff;
         }
     
         .update-profile {
-            background-color: #2ecc71;
+            background-color: #000000;
         }
     
         .logout {
-            background-color: #e74c3c;
+            background-color: #000000;
         }
     
         .delete-profile {
-            background-color: #f39c12;
+            background-color: #000000;
         }
     
         .show-posts {
-            background-color: #3498db;
+            background-color: #000000;
         }
 
         .show-shared-posts {
-            background-color: #9b59b6; /* Choose a color for the new button */
+            background-color: #000000; /* Choose a color for the new button */
         }
     </style>
     
@@ -70,8 +70,8 @@
 </head>
 <body>
 
-    <div class="profile-container">
-        <div class="profile-header">
+    <div class="profile-container ">
+        <div class="profile-header ">
             <h2>{{ user }}</h2> 
             <h3>{{user.email}}</h3>
             {% for user_profile in user_profile  %}
@@ -97,7 +97,7 @@
                     Create Profile</a>
                 {% endif %}
                
-            <a href="/logout/" class="profile-button logout">Logout</a>
+            <!-- <a href="" class="profile-button logout">Logout</a> -->
             <a href="/posts/Delet_profile/{{user.id}}" class="profile-button delete-profile">Delete Profile</a>
             <a href="/posts/UserPost/{{user.id}}" class="profile-button show-posts">Show All Posts</a>
             <a href="{% url 'posts:userSharePost' %}" class="profile-button show-shared-posts">Show Shared Posts</a>

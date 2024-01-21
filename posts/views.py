@@ -95,7 +95,7 @@ class Delet_post(LoginRequiredMixin, DeleteView):
             return True
         return False
 
-@login_required(login_url='/posts/signin/')
+@login_required(login_url='signin')
 def UserProfile(request):
     
     user_profile = Profile.objects.filter(user = request.user)
