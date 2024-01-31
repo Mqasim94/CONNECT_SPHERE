@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView, View
 from .models import Profile, Post, Comment, ReplyComment, User, Share
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from posts.forms import SharePostForm
+from posts.forms import SharePostForm, CreateForm
 
 
 # from .forms import Profile_Model_Form
@@ -51,13 +51,16 @@ class Update_Profile(LoginRequiredMixin, UpdateView):
     template_name = 'posts/update_profile.html'
     success_url = '/posts/List_profile/'
 
+    def get_object(self, queryset=None):
+        return self.request.user.profile
+
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
    
 
-class Delet_profile(LoginRequiredMixin, DetailView):
+class Delet_profile( DeleteView):
     model = Profile
     template_name = 'posts/delet_profile.html'
     success_url = '/posts/List_profile/'
@@ -68,14 +71,13 @@ class Delet_profile(LoginRequiredMixin, DetailView):
 
 class Creat_Post(LoginRequiredMixin, CreateView):
     model = Post
+    form_class = CreateForm  # Specify the form class
     template_name = 'posts/creat_post.html'
-    fields = ['title', 'content', 'created_on', 'image', 'is_private']
     success_url = '/posts/List_Post/'
 
     def form_valid(self, form):
         form.instance.shared_user = self.request.user
         return super().form_valid(form)
-
    
 
 class Update_post(LoginRequiredMixin, UpdateView):
@@ -106,13 +108,21 @@ def UserProfile(request):
 class List_Post(ListView):
     model = Post
     template_name = 'posts/List_post.html'
-
     def get_queryset(self):
         return Post.objects.filter(is_private=False)
-    
-    
-     
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Assuming that shared_user is a ForeignKey on the Post model
+        # Fetching user_profiles for each post's shared_user
+        post_profiles = {post: Profile.objects.filter(user=post.shared_user.id).first() for post in context['object_list']}
+
+        context['post_profiles'] = post_profiles
+
+        return context
+     
+@login_required(login_url='signin')
 def post_detail(request, pk):
     post = get_object_or_404(Post, id=pk)
     comments = post.comments.all()
@@ -131,10 +141,10 @@ def post_detail(request, pk):
         
     return render(request, 'posts/detail_post.html', {'post': post, 'new_comment': new_comment, 'comments': comments, "id":pk, 'total_likes': post.total_like(), 'is_liked': is_liked })
 
-
+@login_required(login_url='signin')
 def like_post(request, pk):
     post = get_object_or_404(Post, id=pk)
-    is_liked = False
+    is_liked = True
     if post.like.filter(id=request.user.id). exists():
         post.like.remove(request.user)
         is_liked = False
@@ -143,7 +153,7 @@ def like_post(request, pk):
         is_liked= True
     return redirect('posts:post_detail', pk=post.id)
 
-
+@login_required(login_url='signin')
 def reply_coment(request, pk):
     cmnt = get_object_or_404(Comment, id=pk)
     replies = cmnt.replies.all()
@@ -155,7 +165,7 @@ def reply_coment(request, pk):
 
     return render(request, 'posts/reply_coment.html',{'reply ': reply , 'replies':replies})
 
-
+@login_required(login_url='signin')
 def sharePost(request, pk):
         
     post = Post.objects.get(pk=pk, is_private=False)
@@ -174,7 +184,7 @@ def sharePost(request, pk):
         form = SharePostForm()
 
     return render(request, 'posts/share.html', {'form': form, 'post': post})   
-
+@login_required(login_url='signin')
 def userSharePost(request):
     shared_posts = Share.objects.filter(sender=request.user)
     print(shared_posts)

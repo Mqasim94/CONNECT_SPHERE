@@ -1,117 +1,121 @@
+
+
 {% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/card.css' %}">
+    <style>
+        .btn-container {
+            display: flex;
+            gap: 10px;
+        }
 
-<style>
-    body {
-        font-family: "Roboto", sans-serif;
-        font-size: 18px;
-        background-image: url('https://static.vecteezy.com/system/resources/previews/014/302/734/non_2x/luxury-abstract-banner-template-with-gold-blended-waves-on-black-background-with-copy-space-for-text-shiny-dynamic-light-stripes-futuristic-twisted-lines-design-in-dark-background-wallpaper-website-vector.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-attachment: fixed;
-        background-position: center;
-    }
-</style>   
-<div class="container" style="margin-top: 50px" >
+        .counts-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+<div class="container">
     <div class="row">
-        <div class="col-md-8 card mb-4 mt-3 left top bg-dark text-light">
-            <div class="card-body ">
-                <h1>{% block title %} {{ post.title }} {% endblock title %}</h1>
-                <p class=" text-light" >{{ post.shared_user }} | {{ post.created_on }}</p>
-                <img src="{{'posts/post.image.url'}}" alt="image">
-                <p class="card-text ">{{ post.content | safe }}</p>
-                {{ total_likes }} Like{{ total_likes|pluralize }}
-                
-                 <form action="{% url 'posts:like_post' post.id %}" method= "POST">
-                    {% csrf_token %}
-                   {% if is_liked %}
-                   <button type="submit" name="post_id" value="{{ post_id }}" class="btn btn-dark">Like</button>
-                   {% else %}
-                   <button type="submit" name="post_id" value="{{ post_id }}" class="btn btn-danger">dislike</button>
-                   {% endif %}
-               </form>   
-            </div>
-        </div>
-        {% block sidebar %}
-        {% include 'sidebar.html' %}
-        {% endblock sidebar %}
-        <div class="col-md-8 card mb-4 mt-3 bg-dark text-light">
-            <div class="card-body">
-                <!-- comments -->
-                <h2>{{ comments.count }} comments</h2>
-                <div id="default-comments">
-                    {% if comments %}
-                        {% for comment in comments %}
-                            <div class="comments" style="padding: 10px;">
-                                <p class="font-weight-bold">
-                                    {{ comment.user }}
-                                    <span class="text-light font-weight-normal">
-                                        {{ comment.created_at }}
-                                    </span>
-                                </p>
-                               <p> {{ comment.content  }}</p>
-                             
-                                <a href="{% url 'posts:reply_coment' comment.id %}">
-                                replies
-                                 </a>
-                                 
-                            </p
-                               >
-                                 <form method="post" action="{% url 'posts:reply_coment' comment.id %}" style="margin-top: 1.3em;" id="reply-form-{{ comment.id }}">
-                                    {% csrf_token %}
-                                    <input type="text" placeholder="Write your reply here" name="reply_content">
-                                    <button type="submit" class="btn btn-dark btn-sm">Reply</button>
-                                </form> 
-                                
-                                
-                            </div>
-                            
-                        {% endfor %}
-                    {% endif %}
-
-                    {% comment %} {% for reply in reply_cmnts %}
-                                    <div class="reply" style="padding: 10px; margin-left: 20px;">
-                                        <p class="font-weight-bold">
-                                            {{ reply.replier_name }}
-                                            <span class="text-muted font-weight-normal">
-                                                {{ reply.replied_date }}
-                                            </span>
-                                        </p>
-                                        {{ reply.reply_content  }}
+        <div class="col-md-8 mt-3 left">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-sm-8">
+                        <div class="panel panel-white post">
+                            <div class="post-heading">
+                                <div class="pull-left image">
+                                    <div class="profile-image-wrapper">
+                                        <img src=" /media/{{user_profile.profile_pic}}" class="img-circle avatar" alt="user profile image">
                                     </div>
-                                {% endfor %} {% endcomment %}
+                                </div>
+                                <div class="pull-left meta">
+                                    <div class="title h5 post-title">
+                                        {{post.title}}
+                                    </div>
+                                    <h6 class="text-muted time">{{post.created_on}}</h6>
+                                </div>
+                            </div>
+                            <div class="post-description">
+                                <p>{{object.content |slice:":100"}}</p>
+                                <div class="post-image">
+                                    <img src="/media/{{ post.image }}" class="image" alt="image post" style="width: 450px; height: 450px">
+                                </div>
+                            </div>
+                            <div class="post-footer">
+                                <div class="btn-container">
+                                    <form action="{% url 'posts:like_post' post.id %}" method= "POST" class="btn-like">
+                                        {% csrf_token %}
+                                        {% if is_liked %}
+                                            <button type="submit" name="post_id" value="{{ post_id }}" class="btn btn-dark">Like</button>
+                                        {% else %}
+                                            <button type="submit" name="post_id" value="{{ post_id }}" class="btn btn-danger">Dislike</button>
+                                        {% endif %}
+                                    </form>
+                                    <button id="show-comments" class="btn btn-dark btn-comment" onclick="toggleComments()">Comment</button>
+                                </div>
+                                <div class="counts-container">
+                                    <span class="like-count">{{ total_likes }} Likes</span>
+                                    <span class="comment-count">{{ comments.count }} Comments</span>
+                                </div>
+                            </div>
+                            <div id="comments-container" style="display: none;">
+                                <!-- comments -->
+                                <div id="default-comments">
+                                    {% if comments %}
+                                        {% for comment in comments %}
+                                            <div class="comments" style="padding: 10px;">
+                                                <p class="font-weight-bold">
+                                                    {{ comment.user }}
+                                                    <span class="text-light font-weight-normal">
+                                                        {{ comment.created_at }}
+                                                    </span>
+                                                </p>
+                                                <p>{{ comment.content }}</p>
+                                                <a href="{% url 'posts:reply_coment' comment.id %}">Replies</a>
+                                                <form method="post" action="{% url 'posts:reply_coment' comment.id %}" style="margin-top: 1.3em;" id="reply-form-{{ comment.id }}">
+                                                    {% csrf_token %}
+                                                    <input type="text" placeholder="Write your reply here" name="reply_content">
+                                                    <button type="submit" class="btn btn-dark btn-sm">Reply</button>
+                                                </form>
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                                <form method="post" style="margin-top: 1.3em;" id="comment-form">
+                                    {% csrf_token %}
+                                    <input type="text" placeholder="Write your comment here" name="content">
+                                    <button type="submit" class="btn btn-dark btn-lg">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <button id="show-all-comments" class="btn btn-dark btn-lg" onclick="toggleComments()">Show All Comments</button>
-                
-                
-                <form method="post" style="margin-top: 1.3em;" id="comment-form">
-                    {% csrf_token %}
-                    <input type="text" placeholder="Write your comment here" name="content">
-                    <button type="submit" class="btn btn-dark btn-lg">Submit</button>
-                </form>
             </div>
-        </div>
-        <script>
-            function toggleComments() {
-                var defaultComments = document.getElementById('default-comments');
-                var allComments = document.getElementById('all-comments');
-                var showAllCommentsButton = document.getElementById('show-all-comments');
-                var commentForm = document.getElementById('comment-form');
-
-                if (defaultComments.style.display === 'none') {
-                    defaultComments.style.display = 'block';
-                    allComments.style.display = 'none';
-                    showAllCommentsButton.innerText = 'Show All Comments';
-                    commentForm.style.display = 'block';
-                } 
-                else {
-                    defaultComments.style.display = 'none';
-                    allComments.style.display = 'block';
-                    showAllCommentsButton.innerText = 'Hide Comments';
-                    commentForm.style.display = 'none';
+            <script>
+                function toggleComments() {
+                    var commentsContainer = document.getElementById('comments-container');
+                    if (commentsContainer.style.display === 'none') {
+                        commentsContainer.style.display = 'block';
+                    } else {
+                        commentsContainer.style.display = 'none';
+                    }
                 }
-            }
-        </script>
+            </script>
+        </div>
     </div>
 </div>
+</body>
+</html>
 {% endblock content %}
+```
+

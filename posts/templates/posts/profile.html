@@ -15,7 +15,7 @@
 </head>
 <body>
     
-    <form method="POST" action = "/posts/profile/" style = "margin-top: 70px; margin-bottom: 70px; padding: 15px;">
+    <form method="POST" action = "/posts/profile/" enctype="multipart/form-data"  style = "margin-top: 70px; margin-bottom: 70px; padding: 15px;">
         
         {% csrf_token %}
 

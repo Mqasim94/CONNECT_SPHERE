@@ -1,40 +1,66 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
+{% load static%} 
 {% block content %}
-<style>
-    body {
-        font-family: "Roboto", sans-serif;
-        font-size: 18px;
-        background-color: #fdfdfd;
-        background-image: url('https://static.vecteezy.com/system/resources/previews/014/302/734/non_2x/luxury-abstract-banner-template-with-gold-blended-waves-on-black-background-with-copy-space-for-text-shiny-dynamic-light-stripes-futuristic-twisted-lines-design-in-dark-background-wallpaper-website-vector.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-attachment: fixed;
-        background-position: center;
-    }
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/postlist.css' %}">
+    <link rel="stylesheet" href="{% static 'css/card.css' %}">
+</head>
+<body>
     
-    .head_text {
-        color: white;
-    }
-    
-    .card {
-        box-shadow: 0 16px 48px #E3E7EB;
-    }
-</style>
+
+
 
 <div class="container">
     <div class="row">
-        <!-- Blog Entries Column -->
+        
         <div class="col-md-8 mt-3 left">
             {% for object in object_list  %}
-            <div class="card mb-4">
-                <div class="card-body bg-dark">
-                    <h2 class="card-title text-light">{{object.title}}</h2>
-                    <p class="card-text text-light h6">{{object.shared_user }} | {{object.created_on}} </p>
-                    <p class="card-text text-light">{{object.content |slice:":100"}}</p>
-                    <a href="{% url 'posts:post_detail' object.id %}" class="btn btn-dark">Read More &rarr;</a>
-                    <a href="/posts/sharePost/{{object.id}}" class="btn btn-secondary">Share</a>
-                </div>
-            </div>
+            
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-sm-8">
+                                <div class="panel panel-white post">
+                                    <div class="post-heading">
+                                        <div class="pull-left image">
+                                            <div class="profile-image-wrapper">
+                                               
+                                                <img src="{{ post_profiles.object.profile_pic.url }}" class="img-circle avatar" alt="user profile image">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="pull-left meta">
+                                            <div class="title h5">
+                                                {{object.shared_user }}
+                                            </div>
+                                            <h6 class="text-muted time">{{object.created_on}}</h6>
+                                        </div>
+                                    </div>
+                                    <div class="post-description">
+                                    <h4>{{object.title}}</h4>
+                                    <p>{{object.content }}</p>
+                                    <div class="post-image">
+                                        <img src="/media/{{ object.image }}" class="image" alt="image post" style="width: 450px; height: 450px">
+                                    </div>
+                                        
+                                        
+                                    </div>
+                                    <div class="post-footer">
+                                        <p>
+                                            <a href="{% url 'posts:post_detail' object.id %}" class="btn btn-dark">like comments &rarr;</a>
+                                            <a href="/posts/sharePost/{{object.id}}" class="btn btn-secondary">Share</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
             {% endfor %}
         </div>
         <div class="col-md-4">
@@ -44,4 +70,6 @@
         </div>
     </div>
 </div>
+</body>
+</html>
 {% endblock %}
