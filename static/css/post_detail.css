@@ -1,0 +1,114 @@
+
+body {
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+.post {
+    border: 1px solid #ddd;
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+
+.post-heading {
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.profile-image-wrapper {
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.profile-image-wrapper img {
+    width: 100%;
+    height: auto;
+}
+
+.post-description {
+    padding: 15px;
+}
+
+.post-image img {
+    width: 100%;
+    height: auto;
+}
+
+.post-footer {
+    border-top: 1px solid #ddd;
+    padding: 15px;
+}
+
+.btn-like {
+    margin-right: 10px;
+}
+
+.comments {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.comments p {
+    margin-bottom: 0;
+}
+
+.reply-form {
+    margin-top: 15px;
+}
+
+#show-all-comments {
+    margin-top: 15px;
+}
+
+
+
+
+/* Rounded buttons */
+.btn-like,
+.btn-primary,
+.btn-dark {
+    border-radius: 20px;
+}
+
+/* Adjust comment button color */
+#comment-form .btn-dark {
+    background-color: #1877f2; /* Facebook-like blue color */
+    border-color: #1877f2; /* Matching border color */
+}
+
+#comment-form .btn-dark:hover {
+    background-color: #166fe5; /* Slightly darker color on hover */
+    border-color: #166fe5;
+}
+
+
+
+.post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-like, .btn-comment {
+    margin-right: 10px;
+}
+
+.comment-count {
+    margin-left: 10px;
+}
+.btn-container {
+    display: flex;
+    gap: 10px;
+}
+
+.counts-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}

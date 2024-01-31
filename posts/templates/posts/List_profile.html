@@ -56,6 +56,8 @@
 
                 <p class='text-light'>City: {{ object.city }}</p>
                 <p class='text-light'>Bio: {{ object.bio | slice:":5" }}</p>
+                <img src="/media/{{object.profile_pic}}" style="width: 250px; height: 250px; border-radius: 50%;" alt="user profile image">
+
                 <!-- Add any additional styling or information for each user -->
             </div>
         {% endfor %}
